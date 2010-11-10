@@ -1,12 +1,15 @@
-var jade = require('jade')
+var fs = require('fs')
+  , jade = require('jade')
   , i18n = require('jade-i18n')
   , helpers = i18n.helpers;
 
-function render(tpl, obj){
-  if (typeof obj == 'string')
-    obj = { language: obj };
-  obj.locals = helpers;
-  return jade.render(__dirname + '/fixtures/' + tpl, obj || {});
+function render(tpl, obj, fn){
+  fs.readFile(__dirname + '/fixtures/' + tpl, function(err, str){
+    if (typeof obj == 'string')
+      obj = { language: obj };
+    obj.locals = helpers;
+    fn(jade.render(str, obj || {}));
+  });
 };
 
 module.exports = {
@@ -14,8 +17,7 @@ module.exports = {
   'test the firing of the missing event for __': function(assert, beforeExit){
     var lang
       , string
-      , desc
-      , html;
+      , desc;
   
     i18n.once('missing', function(_lang, _str, _desc){
       lang = _lang;
@@ -23,13 +25,13 @@ module.exports = {
       desc = _desc;
     });
   
-    html = render('command.jade', 'es_SP');
-  
-    beforeExit(function(){
-      assert.ok(lang == 'es_SP');
-      assert.ok(str == 'Test');
-      assert.ok(desc == 'A command example');
-      assert.ok(html == '<em>Test</em>');
+    render('command.jade', 'es_SP', function(html){
+      beforeExit(function(){
+        assert.ok(lang == 'es_SP');
+        assert.ok(str == 'Test');
+        assert.ok(desc == 'A command example');
+        assert.ok(html == '<em>Test</em>');
+      });
     });
   }
   
