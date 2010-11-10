@@ -1,3 +1,6 @@
+var jade = require('jade')
+  , i18n = require('jade-i18n');
+
 function render(tpl, obj){
   if (typeof obj == 'string')
     obj = { language: obj };
