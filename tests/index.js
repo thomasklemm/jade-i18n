@@ -1,10 +1,15 @@
 var fs = require('fs')
   , jade = require('jade')
   , i18n = require('jade-i18n')
-  , _ = i18n.helpers.__;
+  , _ = i18n.helpers.__
+  , Compiler = i18n.Compiler;
 
 function render(tpl, obj, fn){
   fs.readFile(__dirname + '/fixtures/' + tpl, function(err, str){
+    if (typeof obj == 'function'){
+      fn = obj;
+      obj = {};
+    }
     if (!obj) obj = {};
     if (typeof obj == 'string')
       obj = { language: obj };
@@ -31,7 +36,7 @@ module.exports = {
     render('command-replace.jade', 'es_SP', function(html){
       assert.ok(html == '<em>Hola world</em>');
     });
-    render('command-replace.jade', null, function(html){
+    render('command-replace.jade', function(html){
       assert.ok(html == '<em>Hello world</em>');
     });
   },
