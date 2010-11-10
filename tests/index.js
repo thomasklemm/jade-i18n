@@ -2,6 +2,7 @@ var fs = require('fs')
   , jade = require('jade')
   , i18n = require('jade-i18n')
   , serialize = require('../support/jade-serial').serialize
+  , deserialize = require('../support/jade-serial').deserialize
   , _ = i18n.helpers.__
   , Compiler = i18n.Compiler;
 
@@ -15,6 +16,7 @@ function render(tpl, obj, fn){
     if (typeof obj == 'string')
       obj = { language: obj };
     obj.compiler = Compiler;
+    obj.filename = tpl;
     obj.locals = {
       __: function(){
         return _.apply(this, [obj.language].concat(Array.prototype.slice.call(arguments)));
@@ -60,6 +62,24 @@ module.exports = {
       assert.ok(str == 'Test');
       assert.ok(desc == 'A command example');
       assert.ok(html == '<em>Test</em>');
+    });
+  },
+  
+  'test the translation of a simple tag': function(assert){
+    i18n.phrase('en_CA', { __type: 'tag'
+    , name: 'a'
+    , attrs: [ { name: 'href', val: ' \'#\'' } ]
+    , block: { __type: 'block' }
+    , text: { __type: 'text', __items: [ ' Hello World' ] }
+    }, deserialize({ __type: 'tag'
+    , name: 'a'
+    , attrs: [ { name: 'href', val: ' \'#\'' } ]
+    , block: { __type: 'block' }
+    , text: { __type: 'text', __items: [ ' Hola Mundo' ] }
+    }));
+    
+    render('tag.jade', 'en_CA', function(html){
+      assert.ok(html == '<a href="#">Hola Mundo</a>');
     });
   },
   
