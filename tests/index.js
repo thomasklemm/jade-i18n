@@ -1,6 +1,7 @@
 var fs = require('fs')
   , jade = require('jade')
   , i18n = require('jade-i18n')
+  , serialize = require('../support/jade-serial').serialize
   , _ = i18n.helpers.__
   , Compiler = i18n.Compiler;
 
@@ -47,7 +48,8 @@ module.exports = {
       , string
       , desc;
   
-    i18n.once('missing', function(_lang, _str, _desc){
+    i18n.on('missing', function(_lang, _str, _desc){
+      if (_lang != 'es_SP') return;
       lang = _lang;
       str = _str;
       desc = _desc;
@@ -58,6 +60,29 @@ module.exports = {
       assert.ok(str == 'Test');
       assert.ok(desc == 'A command example');
       assert.ok(html == '<em>Test</em>');
+    });
+  },
+  
+  'test the firing of the missing event for tag': function(assert){
+    var lang
+      , node
+      , desc;
+      
+    i18n.on('missing', function(_lang, _node, _desc){
+      if (_lang != 'ru_RU') return;
+      lang = _lang;
+      node = _node;
+      desc = _desc;
+    });
+    
+    render('tag.jade', 'ru_RU', function(html){
+      node = serialize(node);
+      assert.ok(lang == 'ru_RU');
+      assert.ok(node.__type == 'tag');
+      assert.ok(node.name == 'a');
+      assert.ok(node.attrs.length == 1);
+      assert.ok(desc == undefined);
+      assert.ok(html == '<a href="#">Hello World</a>');
     });
   }
   
