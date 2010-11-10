@@ -5,6 +5,7 @@ var fs = require('fs')
 
 function render(tpl, obj, fn){
   fs.readFile(__dirname + '/fixtures/' + tpl, function(err, str){
+    if (!obj) obj = {};
     if (typeof obj == 'string')
       obj = { language: obj };
     obj.locals = {
@@ -22,6 +23,16 @@ module.exports = {
     i18n.phrase('ja_JP', 'Test', 'Tetzu');
     render('command.jade', 'ja_JP', function(html){
       assert.ok(html == '<em>Tetzu</em>');
+    });
+  },
+  
+  'test replacement translation for __': function(assert){
+    i18n.phrase('es_SP', 'Hello {place}', 'Hola {place}');
+    render('command-replace.jade', 'es_SP', function(html){
+      assert.ok(html == '<em>Hola world</em>');
+    });
+    render('command-replace.jade', null, function(html){
+      assert.ok(html == '<em>Hello world</em>');
     });
   },
   
