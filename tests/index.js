@@ -18,6 +18,13 @@ function render(tpl, obj, fn){
 
 module.exports = {
   
+  'test simple translation for __': function(assert){
+    i18n.phrase('ja_JP', 'Test', 'Tetzu');
+    render('command.jade', 'ja_JP', function(html){
+      assert.ok(html == '<em>Tetzu</em>');
+    });
+  },
+  
   'test the firing of the missing event for __': function(assert){
     var lang
       , string
