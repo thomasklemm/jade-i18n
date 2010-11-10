@@ -13,6 +13,7 @@ function render(tpl, obj, fn){
     if (!obj) obj = {};
     if (typeof obj == 'string')
       obj = { language: obj };
+    obj.compiler = Compiler;
     obj.locals = {
       __: function(){
         return _.apply(this, [obj.language].concat(Array.prototype.slice.call(arguments)));
