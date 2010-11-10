@@ -1,15 +1,17 @@
 var jade = require('jade')
-  , i18n = require('jade-i18n');
+  , i18n = require('jade-i18n')
+  , helpers = i18n.helpers;
 
 function render(tpl, obj){
   if (typeof obj == 'string')
     obj = { language: obj };
+  obj.locals = helpers;
   return jade.render(__dirname + '/fixtures/' + tpl, obj || {});
 };
 
 module.exports = {
   
-  'test the firing of the missing event for _': function(assert, beforeExit){
+  'test the firing of the missing event for __': function(assert, beforeExit){
     var lang
       , string
       , desc
