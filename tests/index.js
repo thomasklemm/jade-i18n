@@ -1,13 +1,17 @@
 var fs = require('fs')
   , jade = require('jade')
   , i18n = require('jade-i18n')
-  , helpers = i18n.helpers;
+  , _ = i18n.helpers.__;
 
 function render(tpl, obj, fn){
   fs.readFile(__dirname + '/fixtures/' + tpl, function(err, str){
     if (typeof obj == 'string')
       obj = { language: obj };
-    obj.locals = helpers;
+    obj.locals = {
+      __: function(){
+        return _.apply(this, [obj.language].concat(Array.prototype.slice.call(arguments)));
+      }
+    };
     fn(jade.render(str, obj || {}));
   });
 };
