@@ -14,7 +14,7 @@ function render(tpl, obj, fn){
 
 module.exports = {
   
-  'test the firing of the missing event for __': function(assert, beforeExit){
+  'test the firing of the missing event for __': function(assert){
     var lang
       , string
       , desc;
@@ -26,12 +26,10 @@ module.exports = {
     });
   
     render('command.jade', 'es_SP', function(html){
-      beforeExit(function(){
-        assert.ok(lang == 'es_SP');
-        assert.ok(str == 'Test');
-        assert.ok(desc == 'A command example');
-        assert.ok(html == '<em>Test</em>');
-      });
+      assert.ok(lang == 'es_SP');
+      assert.ok(str == 'Test');
+      assert.ok(desc == 'A command example');
+      assert.ok(html == '<em>Test</em>');
     });
   }
   
