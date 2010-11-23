@@ -50,7 +50,7 @@ module.exports = {
       , string
       , desc;
   
-    i18n.on('missing', function(_lang, _str, _desc){
+    i18n.on('missing', function(_lang, _str, id, _desc){
       if (_lang != 'es_SP') return;
       lang = _lang;
       str = _str;
@@ -88,7 +88,7 @@ module.exports = {
       , node
       , desc;
       
-    i18n.on('missing', function(_lang, _node, _desc){
+    i18n.on('missing', function(_lang, _node, id, _desc){
       if (_lang != 'ru_RU') return;
       lang = _lang;
       node = _node;
@@ -96,7 +96,6 @@ module.exports = {
     });
     
     render('tag.jade', 'ru_RU', function(html){
-      node = serialize(node);
       assert.ok(lang == 'ru_RU');
       assert.ok(node.__type == 'tag');
       assert.ok(node.name == 'a');
