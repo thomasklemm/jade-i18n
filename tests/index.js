@@ -3,7 +3,7 @@ var fs = require('fs')
   , i18n = require('jade-i18n')
   , serialize = require('../support/jade-serial').serialize
   , deserialize = require('../support/jade-serial').deserialize
-  , _ = i18n.helpers.__
+  , _ = i18n.helpers._
   , Compiler = i18n.Compiler;
 
 function render(tpl, obj, fn){
@@ -18,7 +18,7 @@ function render(tpl, obj, fn){
     obj.compiler = Compiler;
     obj.filename = tpl;
     obj.locals = {
-      __: function(){
+      _: function(){
         return _.apply(this, [obj.language].concat(Array.prototype.slice.call(arguments)));
       }
     };
@@ -28,14 +28,14 @@ function render(tpl, obj, fn){
 
 module.exports = {
   
-  'test simple translation for __': function(assert){
+  'test simple translation for _': function(assert){
     i18n.phrase('ja_JP', 'Test', 'Tetzu');
     render('command.jade', 'ja_JP', function(html){
       assert.ok(html == '<em>Tetzu</em>');
     });
   },
   
-  'test replacement translation for __': function(assert){
+  'test replacement translation for _': function(assert){
     i18n.phrase('es_SP', 'Hello {place}', 'Hola {place}');
     render('command-replace.jade', 'es_SP', function(html){
       assert.ok(html == '<em>Hola world</em>');
@@ -45,7 +45,7 @@ module.exports = {
     });
   },
   
-  'test the firing of the missing event for __': function(assert){
+  'test the firing of the missing event for _': function(assert){
     var lang
       , string
       , desc;
