@@ -1,0 +1,15 @@
+{
+  "name": "jade-i18n",
+  "description": "Jade internationalization module",
+  "version": "0.0.1",
+  "author": "Guillermo Rauch <guillermo@learnboost.com> (http://www.learnboost.com)",
+  "directories": {
+    "lib": "lib/jade-i18n"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "engines": {
+    "node": "*"
+  }
+}
