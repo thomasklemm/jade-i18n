@@ -36,37 +36,37 @@ module.exports = {
       assert.equal(html, '<em>Tetzu</em>');
     });
   },
-  // 
-  // 'test replacement translation for _': function(){
-  //   i18n.phrase('es_SP', 'Hello {place}', 'Hola {place}');
-  //   render('command-replace.jade', 'es_SP', function(html){
-  //     assert.equal(html, '<em>Hola world</em>');
-  //   });
-  //   render('command-replace.jade', function(html){
-  //     assert.equal(html, '<em>Hello world</em>');
-  //   });
-  // },
-  // 
-  // 'test the firing of the missing event for _': function(){
-  //   var lang
-  //     , string
-  //     , desc;
-  // 
-  //   i18n.on('missing', function(_lang, _str, id, _desc){
-  //     if (_lang != 'es_SP') return;
-  //     lang = _lang;
-  //     str = _str;
-  //     desc = _desc;
-  //   });
-  // 
-  //   render('command.jade', 'es_SP', function(html){
-  //     assert.equal(lang, 'es_SP');
-  //     assert.equal(str, 'Test');
-  //     assert.equal(desc, 'A command example');
-  //     assert.equal(html, '<em>Test</em>');
-  //   });
-  // },
-  // 
+  
+  'test replacement translation for _': function(){
+    i18n.phrase('es_SP', 'Hello {place}', 'Hola {place}');
+    render('command-replace.jade', 'es_SP', function(html){
+      assert.equal(html, '<em>Hola world</em>');
+    });
+    render('command-replace.jade', function(html){
+      assert.equal(html, '<em>Hello world</em>');
+    });
+  },
+  
+  'test the firing of the missing event for _': function(){
+    var lang
+      , string
+      , desc;
+  
+    i18n.on('missing', function(_lang, _str, id, _desc){
+      if (_lang != 'es_SP') return;
+      lang = _lang;
+      str = _str;
+      desc = _desc;
+    });
+  
+    render('command.jade', 'es_SP', function(html){
+      assert.equal(lang, 'es_SP');
+      assert.equal(str, 'Test');
+      assert.equal(desc, 'A command example');
+      assert.equal(html, '<em>Test</em>');
+    });
+  },
+  
   // 'test the translation of a simple tag': function(){
   //   i18n.phrase('en_CA', { __type: 'tag'
   //   , name: 'a'
