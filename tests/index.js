@@ -68,18 +68,22 @@ module.exports = {
   },
   
   'test the translation of a simple tag': function(){
-    i18n.phrase('en_CA', { __type: 'tag'
-    , name: 'a'
-    , attrs: [ { name: 'href', val: ' \'#\'' } ]
-    , block: { __type: 'block' }
-    , text: { __type: 'text', __items: [ ' Hello World' ] }
-    }, deserialize({ __type: 'tag'
-    , name: 'a'
-    , attrs: [ { name: 'href', val: ' \'#\'' } ]
-    , block: { __type: 'block' }
-    , text: { __type: 'text', __items: [ ' Hola Mundo' ] }
-    }));
-    
+    var from = { __type: 'tag'
+      , name: 'a'
+      , attrs: [ { name: 'href', val: ' \'#\'' } ]
+      , block: { __type: 'block' }
+      , text: { __type: 'text', __items: [ ' Hello World' ] }
+      };
+
+    var to = deserialize({ __type: 'tag'
+      , name: 'a'
+      , attrs: [ { name: 'href', val: ' \'#\'' } ]
+      , block: { __type: 'block' }
+      , text: { __type: 'text', __items: [ ' Hola Mundo' ] }
+    });
+
+    i18n.phrase('en_CA', from, to);
+
     render('tag.jade', 'en_CA', function(html){
       assert.equal(html, '<a href="#">Hola Mundo</a>');
     });
