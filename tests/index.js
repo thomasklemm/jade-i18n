@@ -8,7 +8,7 @@ var fs = require('fs')
   , Compiler = i18n.Compiler;
 
 function render(tpl, obj, fn){
-  fs.readFile(__dirname + '/fixtures/' + tpl, function(err, str){
+  fs.readFile(__dirname + '/fixtures/' + tpl, 'utf', function(err, str){
     if (typeof obj == 'function'){
       fn = obj;
       obj = {};
@@ -23,7 +23,7 @@ function render(tpl, obj, fn){
         return _.apply(this, [obj.language].concat(Array.prototype.slice.call(arguments)));
       }
     };
-    fn(jade.render(str, obj || {}));
+    fn(jade.compile(str, obj)(obj));
   });
 };
 
