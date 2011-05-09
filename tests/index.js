@@ -32,17 +32,17 @@ module.exports = {
   'test simple translation for _': function(){
     i18n.phrase('ja_JP', 'Test', 'Tetzu');
     render('command.jade', 'ja_JP', function(html){
-      assert.ok(html == '<em>Tetzu</em>');
+      assert.equal(html, '<em>Tetzu</em>');
     });
   },
   
   'test replacement translation for _': function(){
     i18n.phrase('es_SP', 'Hello {place}', 'Hola {place}');
     render('command-replace.jade', 'es_SP', function(html){
-      assert.ok(html == '<em>Hola world</em>');
+      assert.equal(html, '<em>Hola world</em>');
     });
     render('command-replace.jade', function(html){
-      assert.ok(html == '<em>Hello world</em>');
+      assert.equal(html, '<em>Hello world</em>');
     });
   },
   
@@ -59,10 +59,10 @@ module.exports = {
     });
   
     render('command.jade', 'es_SP', function(html){
-      assert.ok(lang == 'es_SP');
-      assert.ok(str == 'Test');
-      assert.ok(desc == 'A command example');
-      assert.ok(html == '<em>Test</em>');
+      assert.equal(lang, 'es_SP');
+      assert.equal(str, 'Test');
+      assert.equal(desc, 'A command example');
+      assert.equal(html, '<em>Test</em>');
     });
   },
   
