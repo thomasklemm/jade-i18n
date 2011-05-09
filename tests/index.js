@@ -24,7 +24,7 @@ function render(tpl, obj, fn){
         return _.apply(this, [obj.language].concat(Array.prototype.slice.call(arguments)));
       }
     };
-    fn(jade.compile(str, obj)(obj));
+    fn(jade.compile(str, obj)(obj.locals));
   });
 };
 
