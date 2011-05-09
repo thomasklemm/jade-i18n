@@ -4,6 +4,7 @@ var fs = require('fs')
   , serialize = require('../support/jade-serial').serialize
   , deserialize = require('../support/jade-serial').deserialize
   , _ = i18n.helpers._
+  , assert = require('assert')
   , Compiler = i18n.Compiler;
 
 function render(tpl, obj, fn){
@@ -28,14 +29,14 @@ function render(tpl, obj, fn){
 
 module.exports = {
   
-  'test simple translation for _': function(assert){
+  'test simple translation for _': function(){
     i18n.phrase('ja_JP', 'Test', 'Tetzu');
     render('command.jade', 'ja_JP', function(html){
       assert.ok(html == '<em>Tetzu</em>');
     });
   },
   
-  'test replacement translation for _': function(assert){
+  'test replacement translation for _': function(){
     i18n.phrase('es_SP', 'Hello {place}', 'Hola {place}');
     render('command-replace.jade', 'es_SP', function(html){
       assert.ok(html == '<em>Hola world</em>');
@@ -45,7 +46,7 @@ module.exports = {
     });
   },
   
-  'test the firing of the missing event for _': function(assert){
+  'test the firing of the missing event for _': function(){
     var lang
       , string
       , desc;
@@ -65,7 +66,7 @@ module.exports = {
     });
   },
   
-  'test the translation of a simple tag': function(assert){
+  'test the translation of a simple tag': function(){
     i18n.phrase('en_CA', { __type: 'tag'
     , name: 'a'
     , attrs: [ { name: 'href', val: ' \'#\'' } ]
@@ -83,7 +84,7 @@ module.exports = {
     });
   },
   
-  'test the firing of the missing event for tag': function(assert){
+  'test the firing of the missing event for tag': function(){
     var lang
       , node
       , desc;
