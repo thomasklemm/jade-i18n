@@ -88,27 +88,27 @@ module.exports = {
       assert.equal(html, '<a href="#">Hola Mundo</a>');
     });
   },
-  // 
-  // 'test the firing of the missing event for tag': function(){
-  //   var lang
-  //     , node
-  //     , desc;
-  //     
-  //   i18n.on('missing', function(_lang, _node, id, _desc){
-  //     if (_lang != 'ru_RU') return;
-  //     lang = _lang;
-  //     node = _node;
-  //     desc = _desc;
-  //   });
-  //   
-  //   render('tag.jade', 'ru_RU', function(html){
-  //     assert.equal(lang, 'ru_RU');
-  //     assert.equal(node.__type, 'tag');
-  //     assert.equal(node.name, 'a');
-  //     assert.equal(node.attrs.length, 1);
-  //     assert.equal(desc, undefined);
-  //     assert.equal(html, '<a href="#">Hello World</a>');
-  //   });
-  // }
+  
+  'test the firing of the missing event for tag': function(){
+    var lang
+      , node
+      , desc;
+      
+    i18n.on('missing', function(_lang, _node, id, _desc){
+      if (_lang != 'ru_RU') return;
+      lang = _lang;
+      node = _node;
+      desc = _desc;
+    });
+    
+    render('tag.jade', 'ru_RU', function(html){
+      assert.equal(lang, 'ru_RU');
+      assert.equal(node.__type, 'tag');
+      assert.equal(node.name, 'a');
+      assert.equal(node.attrs.length, 1);
+      assert.equal(desc, undefined);
+      assert.equal(html, '<a href="#">Hello World</a>');
+    });
+  }
   
 };
