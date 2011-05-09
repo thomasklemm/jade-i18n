@@ -67,23 +67,23 @@ module.exports = {
     });
   },
   
-  // 'test the translation of a simple tag': function(){
-  //   i18n.phrase('en_CA', { __type: 'tag'
-  //   , name: 'a'
-  //   , attrs: [ { name: 'href', val: ' \'#\'' } ]
-  //   , block: { __type: 'block' }
-  //   , text: { __type: 'text', __items: [ ' Hello World' ] }
-  //   }, deserialize({ __type: 'tag'
-  //   , name: 'a'
-  //   , attrs: [ { name: 'href', val: ' \'#\'' } ]
-  //   , block: { __type: 'block' }
-  //   , text: { __type: 'text', __items: [ ' Hola Mundo' ] }
-  //   }));
-  //   
-  //   render('tag.jade', 'en_CA', function(html){
-  //     assert.ok(html == '<a href="#">Hola Mundo</a>');
-  //   });
-  // },
+  'test the translation of a simple tag': function(){
+    i18n.phrase('en_CA', { __type: 'tag'
+    , name: 'a'
+    , attrs: [ { name: 'href', val: ' \'#\'' } ]
+    , block: { __type: 'block' }
+    , text: { __type: 'text', __items: [ ' Hello World' ] }
+    }, deserialize({ __type: 'tag'
+    , name: 'a'
+    , attrs: [ { name: 'href', val: ' \'#\'' } ]
+    , block: { __type: 'block' }
+    , text: { __type: 'text', __items: [ ' Hola Mundo' ] }
+    }));
+    
+    render('tag.jade', 'en_CA', function(html){
+      assert.equal(html, '<a href="#">Hola Mundo</a>');
+    });
+  },
   // 
   // 'test the firing of the missing event for tag': function(){
   //   var lang
@@ -98,12 +98,12 @@ module.exports = {
   //   });
   //   
   //   render('tag.jade', 'ru_RU', function(html){
-  //     assert.ok(lang == 'ru_RU');
-  //     assert.ok(node.__type == 'tag');
-  //     assert.ok(node.name == 'a');
-  //     assert.ok(node.attrs.length == 1);
-  //     assert.ok(desc == undefined);
-  //     assert.ok(html == '<a href="#">Hello World</a>');
+  //     assert.equal(lang, 'ru_RU');
+  //     assert.equal(node.__type, 'tag');
+  //     assert.equal(node.name, 'a');
+  //     assert.equal(node.attrs.length, 1);
+  //     assert.equal(desc, undefined);
+  //     assert.equal(html, '<a href="#">Hello World</a>');
   //   });
   // }
   
