@@ -73,7 +73,7 @@ module.exports = {
       , attrs: [ { name: 'href', val: ' \'#\'' } ]
       , block: { __type: 'block' }
       , text: { __type: 'text', __items: [ ' Hello World' ] }
-      };
+    };
 
     var to = deserialize({ __type: 'tag'
       , name: 'a'
