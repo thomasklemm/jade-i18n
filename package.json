@@ -9,6 +9,9 @@
   "scripts": {
     "test": "make test"
   },
+  "dependencies": {
+    "jade-serial": "0.0.1"
+  }
   "engines": {
     "node": "*"
   }
